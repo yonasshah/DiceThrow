@@ -12,10 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager
-            .beginTransaction().
-            add(R.id.DieContainer, DieFragment.newInstance(20))
-            .commit()
+        if (supportFragmentManager.findFragmentById(R.id.DieContainer) !is DieFragment) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.DieContainer, DieFragment.newInstance(20))
+                .commit()
+        }
 
         findViewById<Button>(R.id.rollDiceButton).setOnClickListener {
             (supportFragmentManager.findFragmentById(R.id.DieContainer) as DieFragment).throwDie()
