@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import kotlin.random.Random
 
 class DieFragment : Fragment() {
@@ -49,5 +50,11 @@ class DieFragment : Fragment() {
     fun throwDie() {
         dieTextView.text = Random.nextInt(1, dieSides+1).toString()
 
+    }
+
+    companion object{
+        fun newInstance(sides: Int) = DieFragment().apply {
+            arguments = bundleOf(DIESIDE to sides)
+        }
     }
 }
