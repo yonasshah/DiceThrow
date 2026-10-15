@@ -51,7 +51,10 @@ class DieFragment : Fragment() {
         }
 
         view.setOnClickListener {
-            throwDie()
+            if (requireActivity() is DieRollInterface)
+                (requireActivity() as DieRollInterface).rollDice()
+            else
+                throw Exception("Please implement the DieRollInterface to attach this fragment.")
         }
     }
 
@@ -65,5 +68,9 @@ class DieFragment : Fragment() {
                 putInt(DIESIDE, sides)
             }
         }
+
+    }
+    interface DieRollInterface {
+        fun rollDice()
     }
 }
